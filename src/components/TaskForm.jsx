@@ -5,8 +5,8 @@ export default function TaskForm({ createTask }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     createTask(title, description);
-    e.target.childNodes[0].value = "";
-    e.target.childNodes[1].value = "";
+    setTitle("")
+    setDescription("")
   };
   return (
     <>
@@ -28,6 +28,7 @@ export default function TaskForm({ createTask }) {
       <input
         placeholder="Escribe tu tarea"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
         style={{
           border: "2px solid #EF4444",
           borderRadius: "2px",
@@ -38,6 +39,7 @@ export default function TaskForm({ createTask }) {
       <input
         placeholder="Escribe tu descripción"
         onChange={(e) => setDescription(e.target.value)}
+        value={description}
         style={{
           border: "2px solid #EF4444",
           borderRadius: "2px",

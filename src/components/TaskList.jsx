@@ -1,46 +1,48 @@
 import React from "react";
 
-export default function TaskList({ tasks, removeText }) {
+export default function TaskList({ tasks, deleteTask,checkTask }) {
   return (
-    <div style={{
-      display:'flex',
-      flexWrap:'wrap',
-      justifyContent:'center'
-    }}>
-      {tasks.map(({ title, description }, i) => {
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      {tasks.map(({ title, description, id, check }) => {
         return (
           <div
-            id={i}
-            key={i}
-            className="border-red-500 border-8 rounded-10 text-red  p-10 m-10 w-5/12 flex flex-col justify-center items-center"
+            id={id}
+            className={
+              !check
+                ? "capitalize border-red-500 border-8 rounded-10 p-5 m-5 w-96 h-72 flex flex-col items-center justify-between"
+                : "capitalize border-green-500 border-8 rounded-10 p-5 m-5 w-96 h-72 flex flex-col items-center justify-between"
+            }
           >
-            <h1>{title}</h1>
-            <p style={{ fontSize: "2rem" }}>{description}</p>
-            <button
-              id={i}
-              className="w-1/5 h-30 bg-red-500 rounded-md border-none my-10"
-              onClick={(e) => {
-                e.target.parentNode.style.display = "none";
-                removeText();
-              }}
-            >
-              Delete
-            </button>
-            <button
-              className="w-1/5 h-30 bg-red-500 rounded-md border-none "
-              onClick={(e) => {
-                e.target.classList.toggle("check");
-                e.target.classList.contains("check")
-                  ? ((e.target.style.background = "green"),
-                    (e.target.parentNode.style.border = "10px solid green"),
-                    (e.target.previousSibling.style.background = "green"))
-                  : ((e.target.style.background = "#EF4444"),
-                    (e.target.parentNode.style.border = "10px solid #EF4444"),
-                    (e.target.previousSibling.style.background = "#EF4444"));
-              }}
-            >
-              Cheack
-            </button>
+            <h1 className="text-3xl">{title}</h1>
+            <p className="text-lg">{description}</p>
+            <div className="flex w-full justify-between">
+              <button
+                className={
+                  !check
+                    ? "w-1/5 h-30 bg-red-500 rounded-md border-none"
+                    : "w-1/5 h-30 bg-green-500 rounded-md border-none"
+                }
+                onClick={() => deleteTask(id)}
+              >
+                Delete
+              </button>
+              <button
+                className={
+                  !check
+                    ? "w-1/5 h-30 bg-red-500 rounded-md border-none "
+                    : "w-1/5 h-30 bg-green-500 rounded-md border-none "
+                }
+                onClick={() => checkTask(id)}
+              >
+                Check
+              </button>
+            </div>
           </div>
         );
       })}

@@ -10,19 +10,24 @@ function App() {
   }, []);
   function createTask(title,description) {
     setTasks([...tasks,{
-      id:tasks.length,
+      id:Date.now(),
       title:title,
-      description:description
+      description:description,
+      check: false
     }])
   }
-  function removeText(){
-    setTasks([...tasks])
+  function deleteTask(taskId){
+    setTasks(tasks.filter(task=> task.id !== taskId))
   }
+  function checkTask(taskId) {
+    setTasks(tasks.map(task => task.id === taskId ? { ...task, check: true } : task));
+  }
+  
 
   return (
     <div >
       <TaskForm createTask={createTask}/>
-      <TaskList tasks={tasks} removeText={removeText}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask} checkTask={checkTask}/>
     </div>
   )
 }
