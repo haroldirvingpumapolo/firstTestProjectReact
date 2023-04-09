@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TaskList({ tasks, deleteTask,checkTask }) {
+export default function TaskList({ tasks, deleteTask, checkTask }) {
   return (
     <div
       style={{
@@ -38,7 +38,7 @@ export default function TaskList({ tasks, deleteTask,checkTask }) {
                     ? "w-1/5 h-30 bg-red-500 rounded-md border-none "
                     : "w-1/5 h-30 bg-green-500 rounded-md border-none "
                 }
-                onClick={() => checkTask(id)}
+                onClick={() => checkTask(id, check)}
               >
                 Check
               </button>
