@@ -1,7 +1,8 @@
-export const tasks=[
+export const tasks = [
   {
-    id:0,
-    title:'Tarea Ejemplo',
-    description:'Mi primera Tarea'
+    id: Date.now(),
+    title: "Tarea Ejemplo",
+    description: "Mi primera Tarea",
+    check: false,
   },
-]
+];
