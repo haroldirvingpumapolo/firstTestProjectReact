@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 export default function TaskForm() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [titleValue, setTitleValue] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
 
   const { createTask } = useContext(TaskContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createTask(title, description);
-    setTitle("");
-    setDescription("");
+    createTask(titleValue, descriptionValue);
+    setTitleValue("");
+    setDescriptionValue("");
   };
   return (
     <>
@@ -34,8 +34,8 @@ export default function TaskForm() {
       >
         <input
           placeholder="Escribe tu tarea"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) => setTitleValue(e.target.value)}
+          value={titleValue}
           style={{
             border: "2px solid #EF4444",
             borderRadius: "2px",
@@ -45,8 +45,8 @@ export default function TaskForm() {
         />
         <input
           placeholder="Escribe tu descripción"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
+          onChange={(e) => setDescriptionValue(e.target.value)}
+          value={descriptionValue}
           style={{
             border: "2px solid #EF4444",
             borderRadius: "2px",

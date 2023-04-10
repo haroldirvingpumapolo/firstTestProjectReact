@@ -1,6 +1,6 @@
 export const tasks = [
   {
-    id: 0,
+    id: Date.now(),
     title: "Tarea Ejemplo",
     description: "Mi primera Tarea",
     check: false,

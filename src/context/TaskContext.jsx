@@ -8,51 +8,42 @@ export const TaskContextProvider = ({ children }) => {
   useEffect(() => {
     setTasks(data);
   }, []);
-  function createTask(title, description) {
+
+  function createTask(titleValue, descriptionValue) {
     setTasks([
       ...tasks,
       {
         id: Date.now(),
-        title: title,
-        description: description,
+        title: titleValue,
+        description: descriptionValue,
         check: false,
         working: false,
       },
     ]);
   }
-  function deleteTask(taskId) {
-    setTasks([...tasks].filter((deletorTask) => deletorTask.id !== taskId));
-  }
-  function checkTask(taskId, check) {
-    !check
-      ? setTasks(
-          [...tasks].map((checktorTask) =>
-            checktorTask.id === taskId
-              ? { ...checktorTask, check: true }
-              : checktorTask
-          )
-        )
-      : setTasks(
-          [...tasks].map((checktorTask) =>
-            checktorTask.id === taskId
-              ? { ...checktorTask, check: false }
-              : checktorTask
-          )
-        );
+
+  function deleteTask(idValue) {
+    setTasks(tasks.filter((deletorTask) => deletorTask.id !== idValue));
   }
 
-  function workingTask(taskId, working) {
-    !working
-      ? setTasks(
-          [...tasks].map((worktorTask) =>
-            worktorTask.id === taskId
-              ? { ...worktorTask, working: true }
-              : { ...worktorTask, working: false }
-          )
-        )
-      : setTasks(
-          [...tasks].map((worktorTask) => ({ ...worktorTask, working: false }))
-        );
+  function checkTask(idValue, CheckValue) {
+    setTasks(
+      tasks.map((checktorTask) => {
+        return checktorTask.id === idValue
+          ? { ...checktorTask, check: CheckValue ? false : true }
+          : checktorTask;
+      })
+    );
+  }
+
+  function workingTask(idValue, workingValue) {
+    setTasks(
+      tasks.map((worktorTask) =>
+        worktorTask.id === idValue
+          ? { ...worktorTask, working: workingValue ? false : true }
+          : { ...worktorTask, working: false }
+      )
+    );
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
+import classNames from "classnames";
 export default function TaskList() {
   const { tasks, deleteTask, checkTask, workingTask } = useContext(TaskContext);
 
@@ -9,6 +10,7 @@ export default function TaskList() {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
+        userSelect: "none",
       }}
     >
       {tasks.map(({ title, description, id, check, working }) => {
@@ -16,23 +18,35 @@ export default function TaskList() {
           <div
             id={id}
             key={id}
-            className={
-              !check
-                ? "capitalize border-red-500 border-8 rounded-10 p-5 m-5 w-96 h-72 flex flex-col items-center justify-between"
-                : "capitalize border-green-500 border-8 rounded-10 p-5 m-5 w-96 h-72 flex flex-col items-center justify-between"
-            }
-            style={!working ? { color: "" } : { color: "red" }}
+            className={classNames(
+              "capitalize",
+              "border-8",
+              "rounded-10",
+              "p-5",
+              "m-5",
+              "w-96",
+              "h-72",
+              "flex",
+              "flex-col",
+              "items-center",
+              "justify-between",
+              `border-${check ? "green" : "red"}-500`,
+              `text-${working ? "red" : undefined}-500`
+            )}
             onClick={() => workingTask(id, working)}
           >
             <h1 className="text-3xl">{title}</h1>
             <p className="text-lg">{description}</p>
             <div className="flex w-full justify-between">
               <button
-                className={
-                  !check
-                    ? "w-1/5 h-30 bg-red-500 rounded-md border-none"
-                    : "w-1/5 h-30 bg-green-500 rounded-md border-none"
-                }
+                className={classNames(
+                  "h-30",
+                  "rounded-md",
+                  "border-none",
+                  "w-20",
+                  `text-${working ? "white" : undefined}`,
+                  `bg-${check ? "green" : "red"}-500`
+                )}
                 onClick={(event) => {
                   event.stopPropagation();
                   deleteTask(id);
@@ -40,13 +54,18 @@ export default function TaskList() {
               >
                 Delete
               </button>
-              <h2 className="text-lg">{!working ? null : "Working on this"}</h2>
+              <h2 className="text-lg">
+                {working ? "Working on this" : undefined}
+              </h2>
               <button
-                className={
-                  !check
-                    ? "w-1/5 h-30 bg-red-500 rounded-md border-none "
-                    : "w-1/5 h-30 bg-green-500 rounded-md border-none "
-                }
+                className={classNames(
+                  "h-30",
+                  "rounded-md",
+                  "border-none",
+                  "w-20",
+                  `text-${working ? "white" : undefined}`,
+                  `bg-${check ? "green" : "red"}-500`
+                )}
                 onClick={(event) => {
                   event.stopPropagation();
                   checkTask(id, check);
