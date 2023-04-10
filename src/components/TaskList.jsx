@@ -31,7 +31,7 @@ export default function TaskList() {
               "items-center",
               "justify-between",
               `border-${check ? "green" : "red"}-500`,
-              `text-${working ? "red" : undefined}-500`
+              working ? `text-red-500` : undefined
             )}
             onClick={() => workingTask(id, working)}
           >
