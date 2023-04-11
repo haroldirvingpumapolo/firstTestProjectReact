@@ -30,7 +30,7 @@ export default function TaskList() {
               "flex-col",
               "items-center",
               "justify-between",
-              `border-${check ? "green" : "red"}-500`,
+              check ? "border-green-500" : "border-red-500",
               working ? `text-red-500` : undefined
             )}
             onClick={() => workingTask(id, working)}
@@ -44,8 +44,8 @@ export default function TaskList() {
                   "rounded-md",
                   "border-none",
                   "w-20",
-                  `text-${working ? "white" : undefined}`,
-                  `bg-${check ? "green" : "red"}-500`
+                  working ? "text-white" : undefined,
+                  check ? "bg-green-500" : "bg-red-500"
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
@@ -63,8 +63,8 @@ export default function TaskList() {
                   "rounded-md",
                   "border-none",
                   "w-20",
-                  `text-${working ? "white" : undefined}`,
-                  `bg-${check ? "green" : "red"}-500`
+                  working ? "text-white" : undefined,
+                  check ? "bg-green-500" : "bg-red-500"
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
