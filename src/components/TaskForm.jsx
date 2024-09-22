@@ -12,11 +12,18 @@ export default function TaskForm() {
     setTitleValue("");
     setDescriptionValue("");
   };
+
+  const isButtonDisabled = !titleValue.trim() || !descriptionValue.trim();
+
   return (
-    <>
+    <section className="form" style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column'
+    }}>
       <h1
         style={{
-          margin: "0 0 0 43%",
           fontSize: "3rem",
           color: "#EF4444",
           fontWeight: "bold",
@@ -30,6 +37,8 @@ export default function TaskForm() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          width: '100%',
+          maxWidth: "1024px"
         }}
       >
         <input
@@ -55,17 +64,20 @@ export default function TaskForm() {
           }}
         />
         <button
+          disabled={isButtonDisabled}
           style={{
             border: "2px solid #EF4444",
             borderRadius: "2px",
             width: "150px",
             height: "40px",
-            background: "#EF4444",
+            background: isButtonDisabled ? "#f87171" : "#EF4444",
+            cursor: isButtonDisabled ? "not-allowed" : "pointer",
+            opacity: isButtonDisabled ? 0.6 : 1,
           }}
         >
           Save
         </button>
       </form>
-    </>
+    </section >
   );
 }
